@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Speech synthesiser</title>
+
+<!--     <link rel="stylesheet" href="style.css"> -->
+    <style type="text/css">
+      #blackBoard{
+        background: green;
+        color: white;
+        border: 10px solid brown;
+        min-height: 300px;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 30px;
+        font-family: sans-serif;
+      }
+
+      button{
+        font-size: 30px;
+        margin: 20px auto;
+
+      }
+    </style>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+      <div id="blackBoard"></div>
+
+<!--     <script src="script.js"></script> -->
+<script type="text/javascript">
+  function showExplonation(str){
+      var div = document.createElement("div");
+          div.setAttribute("id", "appID");
+      var para = document.createElement("p");
+          para.textContent = str;
+      document.getElementById("blackBoard").appendChild(div);
+          div.appendChild(para);
+  }
+</script>
+
+    <script type="text/javascript">
+      var synth = window.speechSynthesis;
+      var voices = synth.getVoices();
+
+      var utterance0 = new SpeechSynthesisUtterance("Итак, первая фраза, которую мы разберём:");
+          utterance0.lang = "ru";
+      var utterance1 = new SpeechSynthesisUtterance("Where can I buy stamps and envelopes?");
+          utterance1.lang = "en-US";
+      var utterance2 = new SpeechSynthesisUtterance("Где я могу купить марки и конверты?");
+          utterance2.lang = "ru";
+      var utterance3 = new SpeechSynthesisUtterance("Where");
+          utterance3.lang = "en-US";
+      var utterance4 = new SpeechSynthesisUtterance("Где");
+          utterance4.lang = "ru";
+      var utterance5 = new SpeechSynthesisUtterance("can");
+          utterance5.lang = "en-US";
+      var utterance6 = new SpeechSynthesisUtterance("могу");
+          utterance6.lang = "ru";
+      var utterance7 = new SpeechSynthesisUtterance("I");
+          utterance7.lang = "en-US";
+      var utterance8 = new SpeechSynthesisUtterance("Я");
+          utterance8.lang = "ru";
+      var utterance9 = new SpeechSynthesisUtterance("buy");
+          utterance9.lang = "en-US";
+      var utterance10 = new SpeechSynthesisUtterance("купить");
+          utterance10.lang = "ru";
+      var utterance11 = new SpeechSynthesisUtterance("stamp");
+          utterance11.lang = "en-US";
+      var utterance12 = new SpeechSynthesisUtterance("марка");
+          utterance12.lang = "ru";
+      var utterance13 = new SpeechSynthesisUtterance("envelope");
+          utterance13.lang = "en-US";
+      var utterance14 = new SpeechSynthesisUtterance("конверт");
+          utterance14.lang = "ru";
+      var utterance15 = new SpeechSynthesisUtterance("Обратите внимание на то, что это вопрос. Поэтому здесь обратный порядок слов.");
+          utterance15.lang = "ru";
+      var utterance16 = new SpeechSynthesisUtterance("I can buy");
+          utterance16.lang = "en-US";
+      var utterance17 = new SpeechSynthesisUtterance("Это утверждение. В конце предложения ставится точка. На первом месте стоит подлежащее. На втором - сказуемое.");
+          utterance17.lang = "ru";
+      var utterance18 = new SpeechSynthesisUtterance("Can I buy?");
+          utterance18.lang = "en-US";
+      var utterance19 = new SpeechSynthesisUtterance("А это уже вопрос. Теперь сказуемое становится на первое место. А подлежащее - на второе.");
+          utterance19.lang = "ru";
+
+    var btn = document.createElement("button");
+        btn.textContent = "Объяснение";
+        btn.addEventListener("click", function(){
+          document.getElementById("blackBoard").textContent = "";
+          synth.speak(utterance0);
+          synth.speak(utterance1);
+              showExplonation("Where can I buy stamps and envelopes?");
+          synth.speak(utterance2);
+              showExplonation("Где я могу купить марки и конверты?")
+          synth.speak(utterance3);
+              showExplonation("Where? - где?");
+          synth.speak(utterance4);
+          synth.speak(utterance5);
+              showExplonation("can - могу");
+          synth.speak(utterance6);
+          synth.speak(utterance7);
+              showExplonation("I - я");
+          synth.speak(utterance8);
+          synth.speak(utterance9);
+              showExplonation("buy - купить");
+          synth.speak(utterance10);
+          synth.speak(utterance11);
+              showExplonation("stamp - марка");
+          synth.speak(utterance12);
+          synth.speak(utterance13);
+              showExplonation("envelope - конверт");
+          synth.speak(utterance14);
+          synth.speak(utterance1);
+          synth.speak(utterance2);
+          synth.speak(utterance15);
+          synth.speak(utterance16);
+          synth.speak(utterance17);
+          synth.speak(utterance18);
+          synth.speak(utterance19);
+        });
+    document.body.appendChild(btn);
+
+/*Как можно реализовать такое приложение на javascript?*/
+/*
+
+Здравствуйте. Делаю полностью фронт-енд приложение. Оно выводит на "доску" предложения/слова с переводом.
+Одновременно идут какие-то объяснения голосом (на данный момент использую WebSpeechAPI, поэтому точно работает в Google Chrome). 
+
+Мне хотелось бы понять как создавать несколько таких объяснялок на странице. Например, с кнопками "Следующее предложение", "предыдущее предложение" Но навыков js программирования не хватает. Что нужно использовать? 
+Функцию-конструктор? Массивы? Или сделать html-карточки, и написать js обработчик (по типу как делаются html слайды с текстом)
+По идее, если объяснялок несколько на странице, то нужно использовать массив (на мой взгляд)
+Но что в этот массив упаковывать?
+Мне бы хотелось, чтобы мне подсказали как это делается, расписали пошагово, что нужно. А я бы сам уже писал 
+
+*/
+
+    </script>
+  </body>
+</html>
